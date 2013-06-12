@@ -72,8 +72,8 @@ def drawCreature(creature):
           text2 = font.render(str(round(n.boxThreshold,2)), 1, (10, 10, 10))
           text3 = font.render("Top number is neuron value", 1, (10, 10, 10))
           text4 = font.render("Bottom number is neuron threshold", 1, (10, 10, 10))
-          textpos1 = text.get_rect()
-          textpos2 = text.get_rect()
+          textpos1 = text1.get_rect()
+          textpos2 = text2.get_rect()
           textpos1.centerx = n.X
           textpos1.centery = n.Y
           textpos2.centerx = n.X
@@ -226,5 +226,13 @@ for c in population:
           bestCreature = c
 for step in range(10):
           bestCreature.neuronList[0].box = inputDataSet[0]
-          bestCreature = stepCreature(creature)
+          ### XXX Should be passing a param of type create but instead passing the class?
+          bestCreature = stepCreature(bestCreature)
 drawCreature(bestCreature)
+
+# Event loop.
+running = True
+while running:
+    for event in pygame.event.get():
+        if event.type == QUIT:
+            running = False;
